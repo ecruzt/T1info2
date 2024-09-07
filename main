@@ -1,0 +1,46 @@
+class Reporte:
+    def __init__(self, rutaArchivo: str):
+        self.__rutaArchivo = rutaArchivo
+        self.__datos = self.__readTxt(rutaArchivo)
+
+    def __readTxt(self, rutaArchivo):
+        datos = {}
+        with open(rutaArchivo, 'r', encoding='utf-8') as archivo:
+            for numero_linea, linea in enumerate(archivo, start=1):
+                partes = linea.strip().split('|')
+                
+                if len(partes) == 3:
+                    zona = partes[0]
+                    hora = partes[1]
+                    datos_recolectados = partes[2]
+                    
+                    try:
+                        frecuencia_cardiaca, presion_arterial, spO2, temperatura, frecuencia_respiratoria = datos_recolectados.split('^')
+                        
+                        datos[numero_linea] = {
+                            'Zona': zona,
+                            'Hora': hora,
+                            'Frecuencia Cardiaca': frecuencia_cardiaca,
+                            'Presión Arterial': presion_arterial,
+                            'SpO2': spO2,
+                            'Temperatura Corporal': temperatura,
+                            'Frecuencia Respiratoria': frecuencia_respiratoria
+                        }
+                    except ValueError:
+                        print(f"Error al procesar la línea {numero_linea}: {datos_recolectados}")
+        return datos
+
+    def obtenerDatos(self):
+        return self.__datos
+
+    def __str__(self):
+        resultado = []
+        for linea, info in self.__datos.items():
+            resultado.append(f"Línea {linea}: {info}")
+        return "\n".join(resultado)
+
+# Uso de la clase
+#se debe cambiar la ruta cuando se vaya a usar
+ruta = r'C:\Users\VICTUS\Desktop\UdeA\Cuarto Semestre\Informática 2\T1info2\reportes.txt'
+reporte = Reporte(ruta)
+print(reporte) 
