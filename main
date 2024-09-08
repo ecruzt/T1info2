@@ -41,6 +41,6 @@ class Reporte:
 
 # Uso de la clase
 #se debe cambiar la ruta cuando se vaya a usar
-ruta = r'C:\Users\VICTUS\Desktop\UdeA\Cuarto Semestre\Informática 2\T1info2\reportes.txt'
+ruta = r"c:\Users\rseba\OneDrive\Escritorio\UNIVERSIDAD DE ANTIOQUIA\semestre 4\INFO 2\TALLER MONITOR\reportes (1).txt"
 reporte = Reporte(ruta)
 print(reporte) 
